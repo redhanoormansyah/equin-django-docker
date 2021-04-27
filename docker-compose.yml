@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  web-django:
+    image: remoteworker.id/equin-django-docker
+    container_name: equin-django-container
+    build: .
+    ports:
+    - "8080:8080"
+    command: python3 manage.py runserver 0.0.0.0:8080
