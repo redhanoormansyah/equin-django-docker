@@ -5,6 +5,23 @@ services:
     image: remoteworker.id/equin-django-docker
     container_name: equin-django-container
     build: .
+    volumes:
+      - .:/equin-django-docker
     ports:
     - "8080:8080"
     command: python3 manage.py runserver 0.0.0.0:8080
+
+  db-postgres:
+    image: library/postgres:13
+    ports:
+    - "5432:5432"
+    volumes:
+    - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "db"
+
+
+volumes:
+  postgres_data:
